@@ -16,9 +16,8 @@ public class HelloController {
         this.service = service;
     }
 
-    @RequestMapping("/")
-    @ResponseBody
-    public String home() {
+    @RequestMapping("/hello")
+    public  @ResponseBody String home() {
         return service.msg();
     }
 
