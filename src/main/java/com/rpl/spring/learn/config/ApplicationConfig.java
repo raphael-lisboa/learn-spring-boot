@@ -3,7 +3,6 @@ package com.rpl.spring.learn.config;
 import com.rpl.spring.learn.service.FileSystemStorageService;
 import com.rpl.spring.learn.service.Service;
 import com.rpl.spring.learn.service.StorageService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,14 +21,7 @@ public class ApplicationConfig {
     @Bean
     StorageService fileSystemStorageService() throws IOException {
         Path path = Files.createTempDirectory("imagesScan");
-        return new FileSystemStorageService(path.toString());
+        return new FileSystemStorageService(path);
     }
 
-    @Bean
-    CommandLineRunner init(StorageService storageService) {
-        return (args) -> {
-            storageService.deleteAll();
-            storageService.init();
-        };
-    }
 }
