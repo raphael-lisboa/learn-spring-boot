@@ -1,8 +1,4 @@
-
-import java.util.Map;
-
 import com.rpl.spring.learn.Main;
-import com.rpl.spring.learn.controller.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.security.auth.login.Configuration;
+import java.util.Map;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
