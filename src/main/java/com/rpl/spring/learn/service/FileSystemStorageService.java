@@ -1,6 +1,8 @@
 package com.rpl.spring.learn.service;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.util.StringUtils;
@@ -16,6 +18,8 @@ import java.util.stream.Stream;
 
 public class FileSystemStorageService implements StorageService {
 
+    private static final Logger log = LoggerFactory.getLogger(FileSystemStorageService.class);
+
     private final Path rootLocation;
 
 
@@ -27,6 +31,7 @@ public class FileSystemStorageService implements StorageService {
     public void store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
+            log.info("Store file: " + filename);
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + filename);
             }
@@ -38,6 +43,7 @@ public class FileSystemStorageService implements StorageService {
             }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(filename),
                     StandardCopyOption.REPLACE_EXISTING);
+            log.info("Success save file");
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
@@ -58,6 +64,7 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Resource loadAsResource(String filename) {
         try {
+            log.info("Load file {} as resource", filename);
             Path file = rootLocation.resolve(filename);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {

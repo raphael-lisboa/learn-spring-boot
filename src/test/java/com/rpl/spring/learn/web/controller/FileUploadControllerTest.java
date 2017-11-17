@@ -1,4 +1,4 @@
-package com.rpl.spring.learn.controller;
+package com.rpl.spring.learn.web.controller;
 
 import com.rpl.spring.learn.Main;
 import com.rpl.spring.learn.service.StorageService;
